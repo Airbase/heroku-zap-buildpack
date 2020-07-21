@@ -1,0 +1,11 @@
+#!/bin/sh
+
+BUILD_DIR="$1"
+
+ZAP_VERSION=`cat ./bin/version`
+ZAP_JAR="${BUILD_DIR}/zap_linux.tar.gz"
+ZAP_URL="https://github.com/zaproxy/zaproxy/releases/download/${ZAP_VERSION}/ZAP_${ZAP_VERSION}_Linux.tar.gz"
+
+echo -n "-----> Downloading ZAP Proxy... from $ZAP_URL to $ZAP_JAR"
+curl -s --retry 3 -o "$ZAP_JAR" -L "$ZAP_URL"
+echo "done"
