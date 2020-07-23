@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 set -xe
 BUILD_DIR="$1"
 
+ADDONS_FILE="/app/addons"
 ZAP_VERSION=`cat ./bin/version`
 ZAP_DIR="${BUILD_DIR}/zaproxy"
 ZAP_TGZ="${BUILD_DIR}/zap_linux.tar.gz"
@@ -13,4 +14,11 @@ curl -s --retry 3 -o "$ZAP_TGZ" -L "$ZAP_URL"
 mkdir -p "${ZAP_DIR}"
 cd "${ZAP_DIR}"
 tar zxf "$ZAP_TGZ" --strip-components=1
+
+if [ -f "$ADDONS_FILE" ]; then
+    for addon in $(</$ADDONS_FILE); do
+        $ZAP_DIR/zap.sh -cmd -addoninstall "$addon"
+    done
+fi
+
 echo "done"
