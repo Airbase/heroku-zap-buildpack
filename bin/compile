@@ -2,7 +2,7 @@
 set -xe
 BUILD_DIR="$1"
 
-ADDONS_FILE="/app/addons"
+ADDONS_FILE="${BUILD_DIR}/addons"
 ZAP_VERSION=`cat ./bin/version`
 ZAP_DIR="${BUILD_DIR}/zaproxy"
 ZAP_TGZ="${BUILD_DIR}/zap_linux.tar.gz"
